@@ -4,23 +4,26 @@ let hexagons = [];
 function setup() {
   createCanvas(400, 400);
   createHoneycomb();
-	
+	noLoop();
+    noStroke();
 	//strokeWeight(width * 0.001);
   
 }
 
 function draw() {
   background('#000');
-	noFill();
-	stroke('#fff');
+	//noFill();
+    
+	//stroke('#fff');
 	for (let h of hexagons) {
+        fill(random(255), random(255), random(255));
 		drawHex(h.x, h.y, h.w, h.a, 0);
 	}
 }
 
 
 function createHoneycomb() {
-	let hexW = width * 0.04;
+	let hexW = width * 0.04; // change to make more/fewer hexagons
 	let hexH = hexW * sqrt(3) / 2;
 	let y = -hexH;
 	let yCounter = 0;
