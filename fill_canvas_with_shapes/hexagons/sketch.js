@@ -1,5 +1,5 @@
 let hexagons = [];
-
+let c = [];
 
 function setup() {
   createCanvas(400, 400);
@@ -8,20 +8,39 @@ function setup() {
     noStroke();
 	//strokeWeight(width * 0.001);
   
+  
+  c = [color('#251558'),color('#731174'),color('#CC1268'),color('#FF5F41'),color('#FFC10A')];
 }
 
 function draw() {
+  
+  let shuffledColours = shuffle(c, true);
+  
   background('#000');
 	//noFill();
     
 	//stroke('#fff');
-	for (let h of hexagons) {
-        fill(random(255), random(255), random(255));
-		drawHex(h.x, h.y, h.w, h.a, 0);
-	}
+// 	for (let h of hexagons) {
+      
+//         fill(random(255), random(255), random(255));
+        
+// 		drawHex(h.x, h.y, h.w, h.a, 0);
+      
+// 	}
+  
+  /* add a palette instead */
+
+    for (let i = 0; i < hexagons.length; i++) {
+  fill(shuffledColours[i % shuffledColours.length]);
+  let h = hexagons[i];
+  drawHex(h.x, h.y, h.w, h.a, 0);
+}
 }
 
 
+  
+
+ 
 function createHoneycomb() {
 	let hexW = width * 0.04; // change to make more/fewer hexagons
 	let hexH = hexW * sqrt(3) / 2;
@@ -85,3 +104,4 @@ function drawRoundPolygon(points, r) {
 	}
 	endShape(CLOSE);
 }
+
