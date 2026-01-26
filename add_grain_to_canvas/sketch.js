@@ -1,3 +1,5 @@
+// add a grain effect to the canvas
+
 function setup() {
   createCanvas(400, 400);
 }
