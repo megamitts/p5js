@@ -8,7 +8,7 @@ function draw() {
   background(220);
   
   arcIt(200,200,150,150,0,180, OPEN);
-  //x,y,w,h,startAngle,stopAngle, OPEN/CHORD/CLOSE
+  //x,y,w,h,startAngle,stopAngle, OPEN/CHORD/PIE
   
 }
 
