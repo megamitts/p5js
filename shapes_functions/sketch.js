@@ -2,7 +2,7 @@
 function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES); // Work in degrees for easier math
-  noLoop(); // Draw once
+  //noLoop(); // Draw once
 }
 
 function draw() {
@@ -115,6 +115,7 @@ function drawPie(x,y, radius, segments, colour1, colour2) {
 function drawDottedCircle(x,y,r, ellipseColour, scratchColour) {
 
   push();
+  randomSeed(99)
   translate(x, y);
   noStroke();
   fill(ellipseColour);
@@ -143,6 +144,7 @@ function drawDottedCircle(x,y,r, ellipseColour, scratchColour) {
 function drawScratchedCircle(x,y,rc,scratchAngleARG,ellipseColour,scratchColour) {
 
   push();
+  randomSeed(99)
   translate(x, y);
 
   let radius = rc;
