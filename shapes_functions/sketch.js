@@ -23,10 +23,10 @@ function draw() {
   drawScratchedCircle(100,300,50,45,'#ff0000','#0000004D');
   //use: drawScratchedCircle2(x,y,rc,scratchAngleARG,ellipseColour, scratchColour)
   
-
-  drawSwirl(300,100, 100, 10, 5, '#000000', '#ff0000',0.5);
-  // use: drawSwirl(cx, cy, maxRadius, turns, step, ellipseColour, swirlColour, scaleSize)
-
+  
+  drawSwirl(300,100, 100, 10, 5, '#000000', '#ff0000',0.5, 200);
+  // use: drawSwirl(cx, cy, maxRadius, turns, step, ellipseColour, swirlColour, scaleSize, rotateAngle)
+  
   
 }
   
@@ -159,7 +159,7 @@ function drawScratchedCircle(x,y,rc,scratchAngleARG,ellipseColour,scratchColour)
     let y = sin(angle) * r;
 
     // Scratch direction (global direction)
-    let scratchAngle = scratchAngleARG; 
+    let scratchAngle = scratchAngleARG; // try changing this
 
     // Small random variation
     scratchAngle += random(-0.2, 0.2);
@@ -181,11 +181,17 @@ function drawScratchedCircle(x,y,rc,scratchAngleARG,ellipseColour,scratchColour)
 }
 
 
-function drawSwirl(cx, cy, maxRadius, turns, step, ellipseColour, swirlColour, scaleSize) {
+
+  
+
+
+
+
+function drawSwirl(cx, cy, maxRadius, turns, step, ellipseColour, swirlColour, scaleSize, rotateAngle) {
   
   push();
   translate(cx,cy);
-  
+  rotate(rotateAngle);
   scale(scaleSize);
   
   fill(ellipseColour);
