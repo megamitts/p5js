@@ -9,9 +9,9 @@ function draw() {
   background(255);
  
 
-  drawStar(200, 200, 20, 10, 5, 87, '#FFD700'); // x, y, outer radius, inner radius, points, rotation
+  drawStar(200, 200, 20, 10, 5, 87, '#FFD700'); // x, y, outer radius, inner radius, points, rotation, colour
   
-  drawCircle(100, 100, 60, '#000000','#00ff00', 45); // x,y, colour1, colour2, rotation
+  drawCircle(100, 100, 60, '#000000','#00ff00', 45); // x,y, radius, colour1, colour2, rotation
   
   drawPie(300,300,50,12,'#000000', '#0000ff'); // x,y, radius, segments, colour1, colour2
   
