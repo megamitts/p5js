@@ -23,6 +23,10 @@ function draw() {
   drawScratchedCircle(100,300,50,45,'#ff0000','#0000004D');
   //use: drawScratchedCircle2(x,y,rc,scratchAngleARG,ellipseColour, scratchColour)
   
+
+  drawSwirl(300,100, 100, 10, 5, '#000000', '#ff0000',0.5);
+  // use: drawSwirl(cx, cy, maxRadius, turns, step, ellipseColour, swirlColour, scaleSize)
+
   
 }
   
@@ -173,5 +177,42 @@ function drawScratchedCircle(x,y,rc,scratchAngleARG,ellipseColour,scratchColour)
     }
   }
 
+  pop();
+}
+
+
+function drawSwirl(cx, cy, maxRadius, turns, step, ellipseColour, swirlColour, scaleSize) {
+  
+  push();
+  translate(cx,cy);
+  
+  scale(scaleSize);
+  
+  fill(ellipseColour);
+  ellipse(0,0, maxRadius*2,maxRadius*2);
+  
+  stroke(swirlColour);
+  
+
+  let totalAngle = 90 * turns;
+
+  let prevX, prevY;
+
+  for (let a = 0; a <= totalAngle; a += step) {
+
+    let r = map(a, 0, totalAngle, 0, maxRadius);
+    let x =  r * cos(a);
+    let y =  r * sin(a);
+
+    if (a > 0) {
+      // thickness shrinks as spiral grows
+      let weight = map(a, 0, totalAngle, 30, 2);
+      strokeWeight(weight);
+      line(prevX, prevY, x, y);
+    }
+
+    prevX = x;
+    prevY = y;
+  }
   pop();
 }
