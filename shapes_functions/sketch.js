@@ -28,6 +28,10 @@ function draw() {
   // use: drawSwirl(cx, cy, maxRadius, turns, step, ellipseColour, swirlColour, scaleSize, rotateAngle)
   
   
+  //symbolAngle += 0.01; 
+  drawYinYang(45, 30, 40, 0); // change 0 to symbolAngle if you want it to rotate);
+  
+  
 }
   
 
@@ -220,5 +224,37 @@ function drawSwirl(cx, cy, maxRadius, turns, step, ellipseColour, swirlColour, s
     prevX = x;
     prevY = y;
   }
+  pop();
+}
+
+function drawYinYang(x, y, d, rot) {
+  push();
+  angleMode(RADIANS);
+  translate(x, y);
+  rotate(rot); 
+  noStroke();
+
+  fill(255);
+  ellipse(0, 0, d, d);
+
+  fill(40);
+  arc(0, 0, d, d, -HALF_PI, HALF_PI);
+
+  ellipse(0, d/4, d/2, d/2);
+
+  fill(255);
+  ellipse(0, -d/4, d/2, d/2);
+
+  fill(40);
+  ellipse(0, -d/4, d/6, d/6);
+
+  fill(255);
+  ellipse(0, d/4, d/6, d/6);
+  
+  noFill();
+  stroke(200, 195, 180);
+  strokeWeight(1);
+  ellipse(0, 0, d, d);
+  angleMode(DEGREES);
   pop();
 }
