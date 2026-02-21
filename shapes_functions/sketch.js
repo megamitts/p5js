@@ -2,7 +2,7 @@
 function setup() {
   createCanvas(400, 400);
   angleMode(DEGREES); // Work in degrees for easier math
-  //noLoop(); // Draw once
+  noLoop(); // Draw once
 }
 
 function draw() {
@@ -31,6 +31,15 @@ function draw() {
   //symbolAngle += 0.01; 
   drawYinYang(45, 30, 40, 0); // change 0 to symbolAngle if you want it to rotate);
   
+  
+  wigglyCircle(200,320,50,9, '#ff0000');
+  //use wigglyCircle(x1,y1,radius, noiseSeed)
+  
+  // Draw a hexagon at x,y with radius r and colour 
+  drawHexagon(60, 200, 60, '#00ff00');
+  
+  wigglyLine(380, 100, 380, 300, 20, 50, 5, '#ff0000');
+ // use: wigglyLine(x1, y1, x2, y2, amp, steps, Weight, colour)
   
 }
   
@@ -257,6 +266,115 @@ function drawYinYang(x, y, d, rot) {
   stroke(200, 195, 180);
   strokeWeight(1);
   ellipse(0, 0, d, d);
+  angleMode(DEGREES);
+  pop();
+}
+
+
+
+
+
+function wigglyCircle(x1,y1,radius, noiseSD, colour){
+  
+  let baseRadius = radius;
+  push();
+  noStroke();
+  noiseSeed(noiseSD)
+  fill(colour);
+  angleMode(RADIANS);
+  translate(x1,y1);
+  
+  beginShape();
+  let noiseScale = 0.5; // Controls smoothness of wiggles
+  
+  //baseRadius += sin(frameCount * 0.02); //sin(t*4) * 1; // expand the circle but keep it positive
+
+  for (let angle = 0; angle < TWO_PI; angle += 0.05) {
+    // Map angle to noise coordinates
+    let xOff = cos(angle) * noiseScale + 1; // shift to avoid negatives
+    let yOff = sin(angle) * noiseScale + 1;
+
+    // Use noise to vary radius
+    let r = baseRadius + map(noise(xOff, yOff), 0, 1, -40, 40);
+
+    // Convert polar to Cartesian
+    let x = r * cos(angle);
+    let y = r * sin(angle);
+    
+    
+    vertex(x, y);
+  }
+  endShape(CLOSE);
+
+  angleMode(DEGREES);
+  pop();
+  
+}
+
+
+ 
+
+
+
+function drawHexagon(x, y, radius, colour) {
+  
+  push();
+  translate(x,y);
+  angleMode(RADIANS);
+  noStroke();
+  fill(colour);
+  beginShape();
+  for (let i = 0; i < 6; i++) {
+    // Angle for each vertex (60 degrees apart)
+    let angle = TWO_PI / 6 * i - PI / 6; // -PI/6 to make flat top
+    let vx =  radius * cos(angle);
+    let vy =  radius * sin(angle);
+    vertex(vx, vy);
+  }
+  endShape(CLOSE);
+  angleMode(DEGREES);
+  pop();
+}
+
+
+ 
+
+
+function wigglyLine(x1, y1, x2, y2, amp, stepCount, Weight, colour) {
+  push();
+  angleMode(RADIANS);
+  beginShape();
+  noFill();
+  strokeWeight(Weight);
+  stroke(colour);
+  // Number of segments — tweak for smoothness vs. performance
+  let steps = stepCount;
+  
+  for (let i = 0; i <= steps; i++) {
+    let t = i / steps; // 0 → 1
+    // Interpolate between start and end
+    let x = lerp(x1, x2, t);
+    let y = lerp(y1, y2, t);
+
+    // Add sinusoidal wiggle perpendicular to the line direction
+    // Compute direction of line
+    let angle = atan2(y2 - y1, x2 - x1);
+
+    // Perpendicular angle
+    let perp = angle + HALF_PI;
+
+    // Wiggle offset
+    let offset = sin(t * TWO_PI * 3 + frameCount * 0.05) * amp; 
+    // (the “3” controls wiggle frequency)
+
+    // Apply offset
+    x += cos(perp) * offset;
+    y += sin(perp) * offset;
+
+    vertex(x, y);
+  }
+
+  endShape();
   angleMode(DEGREES);
   pop();
 }
