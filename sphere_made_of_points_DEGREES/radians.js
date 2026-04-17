@@ -5,7 +5,7 @@ let detail = 30;  // Number of steps for latitude/longitude (higher = smoother)
 
 function setup() {
   createCanvas(500, 500, WEBGL); // Create a 3D canvas
-              // Use degrees for all trig functions
+              
   background(0);                 // Black background
   stroke(255);                   // White points
   strokeWeight(3);               // Size of each point
@@ -14,8 +14,8 @@ function setup() {
 
 function draw() {
   background(0);                 // Clear frame each draw
-  rotateY(frameCount * 0.5);     // Slowly rotate sphere for 3D effect
-  rotateX(frameCount * 0.25);
+  rotateY(frameCount * 0.05);     // Slowly rotate sphere for 3D effect
+  rotateX(frameCount * 0.05);
 
   // Loop over latitude (phi) from -90° to +90°
   for (let i = 0; i <= detail; i++) {
