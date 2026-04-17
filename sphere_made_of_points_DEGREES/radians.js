@@ -1,12 +1,11 @@
 // p5.js sketch: Drawing a sphere using only point() commands
-// This version uses DEGREES instead of radians for angles.
 
 let radius = 150; // Radius of the sphere
 let detail = 30;  // Number of steps for latitude/longitude (higher = smoother)
 
 function setup() {
   createCanvas(500, 500, WEBGL); // Create a 3D canvas
-  angleMode(DEGREES);            // Use degrees for all trig functions
+              // Use degrees for all trig functions
   background(0);                 // Black background
   stroke(255);                   // White points
   strokeWeight(3);               // Size of each point
@@ -20,13 +19,13 @@ function draw() {
 
   // Loop over latitude (phi) from -90° to +90°
   for (let i = 0; i <= detail; i++) {
-    let phi = map(i, 0, detail, -90, 90); // Latitude in degrees
+    let phi = map(i, 0, detail, -HALF_PI, HALF_PI); // Latitude in degrees
     let y = radius * sin(phi);            // Y position
     let r = radius * cos(phi);            // Radius of current latitude circle
 
     // Loop over longitude (theta) from 0° to 360°
     for (let j = 0; j <= detail; j++) {
-      let theta = map(j, 0, detail, 0, 360); // Longitude in degrees
+      let theta = map(j, 0, detail, 0, TWO_PI); // Longitude in degrees
       let x = r * cos(theta);                // X position
       let z = r * sin(theta);                // Z position
 
